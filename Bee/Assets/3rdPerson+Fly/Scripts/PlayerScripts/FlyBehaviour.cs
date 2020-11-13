@@ -109,21 +109,21 @@ public class FlyBehaviour : GenericBehaviour
 			behaviourManager.SetLastDirection(targetDirection);
 		}
 
-		//// Player is flying and idle?
-		//if (!(Mathf.Abs(horizontal) > 0.2 || Mathf.Abs(vertical) > 0.2))
-		//{
-		//	// Rotate the player to stand position.
-		//	behaviourManager.Repositioning();
-		//	// Set collider direction to vertical.
-		//	col.direction = 1;
-		//}
-		//else
-		//{
-		//	// Set collider direction to horizontal.
-		//	col.direction = 2;
-		//}
+        // Player is flying and idle?
+        if (!(Mathf.Abs(horizontal) > 0.2 || Mathf.Abs(vertical) > 0.2))
+        {
+            // Rotate the player to stand position.
+            behaviourManager.Repositioning();
+            // Set collider direction to vertical.
+            col.direction = 1;
+        }
+        else
+        {
+            // Set collider direction to horizontal.
+            col.direction = 2;
+        }
 
-		// Return the current fly direction.
-		return targetDirection;
+        // Return the current fly direction.
+        return targetDirection;
 	}
 }

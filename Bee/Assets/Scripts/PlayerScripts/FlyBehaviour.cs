@@ -20,46 +20,74 @@ public class FlyBehaviour : GenericBehaviour
 		col = this.GetComponent<CapsuleCollider>();
 		// Subscribe this behaviour on the manager.
 		behaviourManager.SubscribeBehaviour(this);
+
+		fly = !fly;
+
+		// Force end jump transition.
+		behaviourManager.UnlockTempBehaviour(behaviourManager.GetDefaultBehaviour);
+
+		// Obey gravity. It's the law!
+		behaviourManager.GetRigidBody.useGravity = !fly;
+
+		// Player is flying.
+		if (fly)
+		{
+			// Register this behaviour.
+			behaviourManager.RegisterBehaviour(this.behaviourCode);
+		}
+		else
+		{
+			// Set collider direction to vertical.
+			col.direction = 1;
+			// Set camera default offset.
+			behaviourManager.GetCamScript.ResetTargetOffsets();
+
+			// Unregister this behaviour and set current behaviour to the default one.
+			behaviourManager.UnregisterBehaviour(this.behaviourCode);
+		}
+
+		fly = fly && behaviourManager.IsCurrentBehaviour(this.behaviourCode);
+
 	}
 
 	// Update is used to set features regardless the active behaviour.
 	void Update()
 	{
 		// Toggle fly by input, only if there is no overriding state or temporary transitions.
-		if (Input.GetButtonDown(flyButton) && !behaviourManager.IsOverriding() 
-			&& !behaviourManager.GetTempLockStatus(behaviourManager.GetDefaultBehaviour))
-		{
-			fly = !fly;
+		//if (Input.GetButtonDown(flyButton) && !behaviourManager.IsOverriding() 
+		//	&& !behaviourManager.GetTempLockStatus(behaviourManager.GetDefaultBehaviour))
+		//{
+		//	fly = !fly;
 
-			// Force end jump transition.
-			behaviourManager.UnlockTempBehaviour(behaviourManager.GetDefaultBehaviour);
+		//	// Force end jump transition.
+		//	behaviourManager.UnlockTempBehaviour(behaviourManager.GetDefaultBehaviour);
 
-			// Obey gravity. It's the law!
-			behaviourManager.GetRigidBody.useGravity = !fly;
+		//	// Obey gravity. It's the law!
+		//	behaviourManager.GetRigidBody.useGravity = !fly;
 
-			// Player is flying.
-			if (fly)
-			{
-				// Register this behaviour.
-				behaviourManager.RegisterBehaviour(this.behaviourCode);
-			}
-			else
-			{
-				// Set collider direction to vertical.
-				col.direction = 1;
-				// Set camera default offset.
-				behaviourManager.GetCamScript.ResetTargetOffsets();
+		//	// Player is flying.
+		//	if (fly)
+		//	{
+		//		// Register this behaviour.
+		//		behaviourManager.RegisterBehaviour(this.behaviourCode);
+		//	}
+		//	else
+		//	{
+		//		// Set collider direction to vertical.
+		//		col.direction = 1;
+		//		// Set camera default offset.
+		//		behaviourManager.GetCamScript.ResetTargetOffsets();
 
-				// Unregister this behaviour and set current behaviour to the default one.
-				behaviourManager.UnregisterBehaviour(this.behaviourCode);
-			}
-		}
+		//		// Unregister this behaviour and set current behaviour to the default one.
+		//		behaviourManager.UnregisterBehaviour(this.behaviourCode);
+		//	}
+		//}
 
 		// Assert this is the active behaviour
 		fly = fly && behaviourManager.IsCurrentBehaviour(this.behaviourCode);
 
 		// Set fly related variables on the Animator Controller.
-		behaviourManager.GetAnim.SetBool(flyBool, fly);
+		//behaviourManager.GetAnim.SetBool(flyBool, fly);
 	}
 
 	// This function is called when another behaviour overrides the current one.

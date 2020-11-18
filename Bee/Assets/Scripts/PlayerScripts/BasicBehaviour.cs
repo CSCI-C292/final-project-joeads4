@@ -28,6 +28,8 @@ public class BasicBehaviour : MonoBehaviour
 	private int groundedBool;                             // Animator variable related to whether or not the player is on the ground.
 	private Vector3 colExtents;                           // Collider extents for ground test. 
 
+	public Collider pickup;
+
 	// Get current horizontal and vertical axes.
 	public float GetH { get { return h; } }
 	public float GetV { get { return v; } }
@@ -146,8 +148,20 @@ public class BasicBehaviour : MonoBehaviour
 
 	}
 
-	// Put a new behaviour on the behaviours watch list.
-	public void SubscribeBehaviour(GenericBehaviour behaviour)
+    private void OnTriggerStay(Collider other)
+    {
+		Debug.Log("Collided");
+		if (Input.GetKeyDown(KeyCode.E))
+        {
+			Debug.Log("e pressed");
+			pickup = other;
+			Destroy(pickup.gameObject);
+		}
+		
+    }
+
+    // Put a new behaviour on the behaviours watch list.
+    public void SubscribeBehaviour(GenericBehaviour behaviour)
 	{
 		behaviours.Add (behaviour);
 	}

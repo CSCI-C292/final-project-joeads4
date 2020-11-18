@@ -16,7 +16,7 @@ public class FlyBehaviour : GenericBehaviour
 	void Start()
 	{
 		// Set up the references.
-		flyBool = Animator.StringToHash("Fly");
+		//flyBool = Animator.StringToHash("Fly");
 		col = this.GetComponent<CapsuleCollider>();
 		// Subscribe this behaviour on the manager.
 		behaviourManager.SubscribeBehaviour(this);
@@ -88,6 +88,7 @@ public class FlyBehaviour : GenericBehaviour
 
 		// Set fly related variables on the Animator Controller.
 		//behaviourManager.GetAnim.SetBool(flyBool, fly);
+
 	}
 
 	// This function is called when another behaviour overrides the current one.
@@ -111,7 +112,7 @@ public class FlyBehaviour : GenericBehaviour
 	{
 		// Add a force player's rigidbody according to the fly direction.
 		Vector3 direction = Rotating(horizontal, vertical);
-		behaviourManager.GetRigidBody.AddForce((direction * flySpeed * 100 * (behaviourManager.IsSprinting() ? sprintFactor : 1)), ForceMode.Acceleration);
+		behaviourManager.GetRigidBody.AddForce(direction * flySpeed * 100, ForceMode.Acceleration);
 	}
 
 	// Rotate the player to match correct orientation, according to camera and key pressed.
@@ -136,6 +137,11 @@ public class FlyBehaviour : GenericBehaviour
 			behaviourManager.GetRigidBody.MoveRotation(newRotation);
 			behaviourManager.SetLastDirection(targetDirection);
 		}
+
+		if (!behaviourManager.IsMoving())
+        {
+			GetComponent<MoveBehaviour>().RemoveVerticalVelocity();
+        }
 
         // Player is flying and idle?
         if (!(Mathf.Abs(horizontal) > 0.2 || Mathf.Abs(vertical) > 0.2))

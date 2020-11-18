@@ -25,7 +25,7 @@ public class BasicBehaviour : MonoBehaviour
 	private List<GenericBehaviour> behaviours;            // The list containing all the enabled player behaviours.
 	private List<GenericBehaviour> overridingBehaviours;  // List of current overriding behaviours.
 	private Rigidbody rBody;                              // Reference to the player's rigidbody.
-	private int groundedBool;                             // Animator variable related to whether or not the player is on the ground.
+	//private int groundedBool;                             // Animator variable related to whether or not the player is on the ground.
 	private Vector3 colExtents;                           // Collider extents for ground test. 
 
 	public Collider pickup;
@@ -58,7 +58,7 @@ public class BasicBehaviour : MonoBehaviour
 		rBody = GetComponent<Rigidbody> ();
 
 		// Grounded verification variables.
-		groundedBool = Animator.StringToHash("Grounded");
+		//groundedBool = Animator.StringToHash("Grounded");
 		colExtents = GetComponent<Collider>().bounds.extents;
 	}
 
@@ -76,18 +76,18 @@ public class BasicBehaviour : MonoBehaviour
 		sprint = Input.GetButton (sprintButton);
 
 		// Set the correct camera FOV for sprint mode.
-		if(IsSprinting())
-		{
-			changedFOV = true;
-			camScript.SetFOV(sprintFOV);
-		}
-		else if(changedFOV)
+		//if(IsSprinting())
+		//{
+		//	changedFOV = true;
+		//	camScript.SetFOV(sprintFOV);
+		//}
+		if(changedFOV)
 		{
 			camScript.ResetFOV();
 			changedFOV = false;
 		}
 		// Set the grounded test on the Animator Controller.
-		anim.SetBool(groundedBool, IsGrounded());
+		//anim.SetBool(groundedBool, IsGrounded());
 	}
 
 	// Call the FixedUpdate functions of the active or overriding behaviours.
@@ -275,26 +275,26 @@ public class BasicBehaviour : MonoBehaviour
 	// Common functions to any behaviour:
 
 	// Check if player is sprinting.
-	public virtual bool IsSprinting()
-	{
-		return sprint && IsMoving() && CanSprint();
-	}
+	//public virtual bool IsSprinting()
+	//{
+	//	return sprint && IsMoving() && CanSprint();
+	//}
 
 	// Check if player can sprint (all behaviours must allow).
-	public bool CanSprint()
-	{
-		foreach (GenericBehaviour behaviour in behaviours)
-		{
-			if (!behaviour.AllowSprint ())
-				return false;
-		}
-		foreach(GenericBehaviour behaviour in overridingBehaviours)
-		{
-			if (!behaviour.AllowSprint())
-				return false;
-		}
-		return true;
-	}
+	//public bool CanSprint()
+	//{
+	//	foreach (GenericBehaviour behaviour in behaviours)
+	//	{
+	//		if (!behaviour.AllowSprint ())
+	//			return false;
+	//	}
+	//	foreach(GenericBehaviour behaviour in overridingBehaviours)
+	//	{
+	//		if (!behaviour.AllowSprint())
+	//			return false;
+	//	}
+	//	return true;
+	//}
 
 	// Check if the player is moving on the horizontal plane.
 	public bool IsHorizontalMoving()
@@ -378,8 +378,8 @@ public abstract class GenericBehaviour : MonoBehaviour
 	}
 
 	// Check if the behaviour allows sprinting.
-	public bool AllowSprint()
-	{
-		return canSprint;
-	}
+	//public bool AllowSprint()
+	//{
+	//	return canSprint;
+	//}
 }

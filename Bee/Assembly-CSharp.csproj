@@ -63,13 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\3rdPerson+Fly\Scripts\LevelScripts\ControlsTutorial.cs" />
-    <Compile Include="Assets\3rdPerson+Fly\Scripts\LevelScripts\HintManagement.cs" />
-    <Compile Include="Assets\3rdPerson+Fly\Scripts\LevelScripts\ThirdPersonOrbitCamBasic.cs" />
-    <Compile Include="Assets\3rdPerson+Fly\Scripts\PlayerScripts\AimBehaviourBasic.cs" />
-    <Compile Include="Assets\3rdPerson+Fly\Scripts\PlayerScripts\BasicBehaviour.cs" />
-    <Compile Include="Assets\3rdPerson+Fly\Scripts\PlayerScripts\FlyBehaviour.cs" />
-    <Compile Include="Assets\3rdPerson+Fly\Scripts\PlayerScripts\MoveBehaviour.cs" />
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Attributes\GetSetAttribute.cs" />
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Attributes\MinAttribute.cs" />
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Attributes\TrackballAttribute.cs" />
@@ -115,6 +108,14 @@
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Utils\MaterialFactory.cs" />
     <Compile Include="Assets\GreenForest\PostProcessing\Runtime\Utils\RenderTextureFactory.cs" />
     <Compile Include="Assets\GreenForest\PostProcessing\Utilities\CustomMotionTexture\ExampleWheelController.cs" />
+    <Compile Include="Assets\Scripts\LevelScripts\ControlsTutorial.cs" />
+    <Compile Include="Assets\Scripts\LevelScripts\GameManager.cs" />
+    <Compile Include="Assets\Scripts\LevelScripts\HintManagement.cs" />
+    <Compile Include="Assets\Scripts\LevelScripts\ThirdPersonOrbitCamBasic.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\AimBehaviourBasic.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\BasicBehaviour.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\FlyBehaviour.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\MoveBehaviour.cs" />
     <None Include="Assets\GreenForest\PostProcessing\Resources\Shaders\DepthOfField.shader" />
     <None Include="Assets\GreenForest\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
     <None Include="Assets\GreenForest\PostProcessing\Resources\Shaders\Fog.shader" />

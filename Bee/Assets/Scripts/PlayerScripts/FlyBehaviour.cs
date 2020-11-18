@@ -140,7 +140,7 @@ public class FlyBehaviour : GenericBehaviour
 
 		if (!behaviourManager.IsMoving())
         {
-			GetComponent<MoveBehaviour>().RemoveVerticalVelocity();
+			this.GetComponent<MoveBehaviour>().RemoveVerticalVelocity();
         }
 
         // Player is flying and idle?

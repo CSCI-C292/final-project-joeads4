@@ -23,7 +23,7 @@ public class MoveBehaviour : GenericBehaviour
 		// Set up the references.
 		jumpBool = Animator.StringToHash("Jump");
 		groundedBool = Animator.StringToHash("Grounded");
-		behaviourManager.GetAnim.SetBool(groundedBool, true);
+		//behaviourManager.GetAnim.SetBool(groundedBool, true);
 
 		// Subscribe and register this behaviour as the default behaviour.
 		behaviourManager.SubscribeBehaviour(this);

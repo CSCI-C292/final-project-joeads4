@@ -15,8 +15,11 @@ public class Pollen : MonoBehaviour
 
     public int pollenCount;
 
+    public int pollenModifier;
+
     private bool canPickupPollen;
     bool canDepositPollen;
+    bool pollinated;
     // Use this for initialization
     void Start()
     {
@@ -26,7 +29,7 @@ public class Pollen : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pollenText.text = "Current Pollen: " + Singleton.Instance.pollenTotal.ToString();
+        pollenText.text = "Current Nectar: " + Singleton.Instance.pollenTotal.ToString();
 
         if (canPickupPollen)
         {
@@ -39,7 +42,7 @@ public class Pollen : MonoBehaviour
                 Destroy(c);
 
 
-                pollenCount = pollenCount + 3;
+                pollenCount = pollenCount + pollenModifier;
                 Singleton.Instance.pollenTotal = pollenCount;
 
                 StartCoroutine(Wait());
@@ -61,6 +64,16 @@ public class Pollen : MonoBehaviour
 
                 
             }
+        }
+
+
+        if (pollinated)
+        {
+            pollenModifier = 5;
+        }
+        else
+        {
+            pollenModifier = 3;
         }
     }
 
@@ -117,4 +130,12 @@ public class Pollen : MonoBehaviour
         }
     }
 
+    private void OnParticleTrigger()
+    {
+        Debug.Log("Pollinated flower");
+        pollinated = true;
+        
+    }
+
+  
 }

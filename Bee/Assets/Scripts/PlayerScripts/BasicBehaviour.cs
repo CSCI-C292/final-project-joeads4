@@ -29,6 +29,9 @@ public class BasicBehaviour : MonoBehaviour
 	//private int groundedBool;                             // Animator variable related to whether or not the player is on the ground.
 	private Vector3 colExtents;                           // Collider extents for ground test. 
 
+	private ParticleSystem pSystem;
+
+	bool toggle;
 
 	// Get current horizontal and vertical axes.
 	public float GetH { get { return h; } }
@@ -60,6 +63,8 @@ public class BasicBehaviour : MonoBehaviour
 		// Grounded verification variables.
 		//groundedBool = Animator.StringToHash("Grounded");
 		colExtents = GetComponent<Collider>().bounds.extents;
+
+		pSystem = GetComponent<ParticleSystem>();
 	}
 
 	void Update()
@@ -86,6 +91,30 @@ public class BasicBehaviour : MonoBehaviour
 			camScript.ResetFOV();
 			changedFOV = false;
 		}
+
+
+		
+		{
+			if (Input.GetKeyDown(KeyCode.Q))
+            {
+				toggle = !toggle;
+
+				if (toggle)
+                {
+					pSystem.Play();
+					print("Toggled ON");
+				}
+
+                else
+                {
+					pSystem.Stop();
+					print("Toggled OFF");
+				}
+					
+			}
+				
+		}
+
 		// Set the grounded test on the Animator Controller.
 		//anim.SetBool(groundedBool, IsGrounded());
 	}

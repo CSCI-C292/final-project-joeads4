@@ -38,6 +38,7 @@ public class BasicBehaviour : MonoBehaviour
 
 	bool toggle;
 	bool canDeposit;
+	public bool pollinated;
 
 	// Get current horizontal and vertical axes.
 	public float GetH { get { return h; } }
@@ -145,8 +146,15 @@ public class BasicBehaviour : MonoBehaviour
 		}
 
 		nectarText.text = "Current Nectar: " + Singleton.Instance.nectarCount.ToString();
-		// Set the grounded test on the Animator Controller.
-		//anim.SetBool(groundedBool, IsGrounded());
+
+		if (pollinated)
+		{
+			Singleton.Instance.pollenModifier = 5;
+		}
+		else
+		{
+			Singleton.Instance.pollenModifier = 3;
+		}
 	}
 
 	// Call the FixedUpdate functions of the active or overriding behaviours.
@@ -185,6 +193,8 @@ public class BasicBehaviour : MonoBehaviour
 	// Call the LateUpdate functions of the active or overriding behaviours.
 	private void LateUpdate()
 	{
+		pollinated = false;
+
 		// Call the active behaviour if no other is overriding.
 		if (behaviourLocked > 0 || overridingBehaviours.Count == 0)
 		{
@@ -228,7 +238,12 @@ public class BasicBehaviour : MonoBehaviour
 
 
 
+	//private void OnParticleTrigger()
+	//{
+	//	Debug.Log("Pollinated flower");
+	//	pollinated = true;
 
+	//}
 
 
 	// Put a new behaviour on the behaviours watch list.
@@ -453,4 +468,5 @@ public abstract class GenericBehaviour : MonoBehaviour
 	//{
 	//	return canSprint;
 	//}
+
 }

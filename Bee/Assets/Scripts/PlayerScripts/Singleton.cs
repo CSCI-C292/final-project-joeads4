@@ -10,6 +10,8 @@ public class Singleton : MonoBehaviour
 
     public int nectarCount;
 
+    public int pollenModifier;
+
     public static Singleton Instance
     {
         // Here we use the ?? operator, to return 'instance' if 'instance' does not equal null

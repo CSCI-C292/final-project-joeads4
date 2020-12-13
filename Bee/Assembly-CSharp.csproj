@@ -117,6 +117,7 @@
     <Compile Include="Assets\Scripts\PlayerScripts\FlyBehaviour.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\MoveBehaviour.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\Pickups.cs" />
+    <Compile Include="Assets\Scripts\PlayerScripts\Pollination.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\Singleton.cs" />
     <None Include="Assets\GreenForest\PostProcessing\Resources\Shaders\DepthOfField.shader" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />

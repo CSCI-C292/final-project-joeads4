@@ -10,7 +10,7 @@ public class Pickups : MonoBehaviour
 
     private GameObject spawnedItem;
 
-    int pollenModifier = 3;
+    //int pollenModifier;
     public int nectarCount;
 
     bool canPickup;
@@ -32,7 +32,7 @@ public class Pickups : MonoBehaviour
                 Debug.Log("e pressed");
                 canPickup = false;
 
-                Singleton.Instance.nectarCount += pollenModifier;
+                Singleton.Instance.nectarCount += Singleton.Instance.pollenModifier;
 
                 Destroy(spawnedItem);
 
@@ -40,14 +40,7 @@ public class Pickups : MonoBehaviour
             }
         }
 
-        //if (pollinated)
-        //{
-        //    pollenModifier = 5;
-        //}
-        //else
-        //{
-        //    pollenModifier = 3;
-        //}
+        
     }
     private IEnumerator Wait()
     {
@@ -87,10 +80,5 @@ public class Pickups : MonoBehaviour
     }
 
 
-    private void OnParticleTrigger()
-    {
-        Debug.Log("Pollinated flower");
-        pollinated = true;
-
-    }
+    
 }

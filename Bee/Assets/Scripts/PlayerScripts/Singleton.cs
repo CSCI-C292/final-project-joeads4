@@ -17,10 +17,7 @@ public class Singleton : MonoBehaviour
         get { return instance ?? (instance = new GameObject("Singleton").AddComponent<Singleton>()); }
     }
 
-    private void Update()
-    {
-        
-    }
+
 
 }
 

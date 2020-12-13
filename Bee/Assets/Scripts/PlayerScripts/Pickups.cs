@@ -10,7 +10,7 @@ public class Pickups : MonoBehaviour
 
     private GameObject spawnedItem;
 
-    public int pollenModifier = 3;
+    int pollenModifier = 3;
     public int nectarCount;
 
     bool canPickup;

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 // This class manages which player behaviour is active or overriding, and call its local functions.
 // Contains basic setup and common functions used by all the player behaviours.
@@ -31,7 +32,12 @@ public class BasicBehaviour : MonoBehaviour
 
 	private ParticleSystem pSystem;
 
+	//public int NectarCount;
+
+	public TMP_Text nectarText;
+
 	bool toggle;
+	bool canDeposit;
 
 	// Get current horizontal and vertical axes.
 	public float GetH { get { return h; } }
@@ -67,7 +73,12 @@ public class BasicBehaviour : MonoBehaviour
 		pSystem = GetComponent<ParticleSystem>();
 	}
 
-	void Update()
+ //   private void Start()
+ //   {
+	//	Singleton.Instance.nectarCount = NectarCount;
+	//}
+
+    void Update()
 	{
 		// Store the input axes.
 		//h = Input.GetAxis("Horizontal");
@@ -92,7 +103,7 @@ public class BasicBehaviour : MonoBehaviour
 			changedFOV = false;
 		}
 
-
+		
 		
 		{
 			if (Input.GetKeyDown(KeyCode.Q))
@@ -115,6 +126,25 @@ public class BasicBehaviour : MonoBehaviour
 				
 		}
 
+
+		if (canDeposit)
+		{
+			if (Input.GetKeyDown(KeyCode.E))
+			{
+				Debug.Log("hive pressed");
+				canDeposit = false;
+
+				Singleton.Instance.hiveTotal += Singleton.Instance.nectarCount;
+				//Debug.Log("Hive total: " + Singleton.Instance.hiveTotal);
+
+				//NectarCount = 0;
+				Singleton.Instance.nectarCount = 0;
+
+
+			}
+		}
+
+		nectarText.text = "Current Nectar: " + Singleton.Instance.nectarCount.ToString();
 		// Set the grounded test on the Animator Controller.
 		//anim.SetBool(groundedBool, IsGrounded());
 	}
@@ -177,10 +207,32 @@ public class BasicBehaviour : MonoBehaviour
 
 	}
 
-    
 
-    // Put a new behaviour on the behaviours watch list.
-    public void SubscribeBehaviour(GenericBehaviour behaviour)
+
+	private void OnTriggerEnter(Collider collider)
+	{
+		if (collider.gameObject.tag == "Hive")
+		{
+			Debug.Log("Colliding with hive");
+			canDeposit = true;
+		}
+	}
+
+	private void OnTriggerExit(Collider collider)
+	{
+		if (collider.gameObject.tag == "Hive")
+		{
+			canDeposit = false;
+		}
+	}
+
+
+
+
+
+
+	// Put a new behaviour on the behaviours watch list.
+	public void SubscribeBehaviour(GenericBehaviour behaviour)
 	{
 		behaviours.Add (behaviour);
 	}

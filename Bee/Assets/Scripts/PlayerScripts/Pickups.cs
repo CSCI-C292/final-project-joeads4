@@ -57,7 +57,7 @@ public class Pickups : MonoBehaviour
     private IEnumerator Wait()
     {
         Debug.Log("Coroutine started");
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(30f);
 
 
         SpawnCollectables();

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Pickups : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class Pickups : MonoBehaviour
 
     //int pollenModifier;
     public int nectarCount;
+
+    public TMP_Text colliderText;
+
+    public List<GameObject> spawnedList = new List<GameObject>();
 
     bool canPickup;
     bool pollinated;
@@ -27,17 +32,24 @@ public class Pickups : MonoBehaviour
     {
         if (canPickup)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (spawnedList.Count >= 1)
             {
-                Debug.Log("e pressed");
-                canPickup = false;
+                colliderText.gameObject.SetActive(true);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    Debug.Log("e pressed");
+                    canPickup = false;
 
-                Singleton.Instance.nectarCount += Singleton.Instance.pollenModifier;
 
-                Destroy(spawnedItem);
+                    Singleton.Instance.nectarCount += Singleton.Instance.pollenModifier;
+                    colliderText.gameObject.SetActive(false);
+                    Destroy(spawnedItem);
+                    spawnedList.Clear();
 
-                StartCoroutine(Wait());
+                    StartCoroutine(Wait());
+                }
             }
+            
         }
 
         
@@ -57,6 +69,7 @@ public class Pickups : MonoBehaviour
 
         spawnedItem = Instantiate(item, spawnPoint.position, spawnPoint.rotation);
 
+        spawnedList.Add(spawnedItem);
         return spawnedItem;
     }
 
@@ -75,6 +88,7 @@ public class Pickups : MonoBehaviour
         if (collider.gameObject.tag == "Player")
         {
             canPickup = false;
+            colliderText.gameObject.SetActive(false);
         }
 
     }

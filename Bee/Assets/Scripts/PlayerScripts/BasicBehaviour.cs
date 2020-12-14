@@ -30,11 +30,12 @@ public class BasicBehaviour : MonoBehaviour
 	//private int groundedBool;                             // Animator variable related to whether or not the player is on the ground.
 	private Vector3 colExtents;                           // Collider extents for ground test. 
 
-	private ParticleSystem pSystem;
+	//private ParticleSystem pSystem;
 
 	//public int NectarCount;
 
 	public TMP_Text nectarText;
+	public TMP_Text hiveText;
 
 	bool toggle;
 	bool canDeposit;
@@ -71,7 +72,7 @@ public class BasicBehaviour : MonoBehaviour
 		//groundedBool = Animator.StringToHash("Grounded");
 		colExtents = GetComponent<Collider>().bounds.extents;
 
-		pSystem = GetComponent<ParticleSystem>();
+		//pSystem = GetComponent<ParticleSystem>();
 	}
 
  //   private void Start()
@@ -104,37 +105,16 @@ public class BasicBehaviour : MonoBehaviour
 			changedFOV = false;
 		}
 
-		
-		
-		{
-			if (Input.GetKeyDown(KeyCode.Q))
-            {
-				toggle = !toggle;
-
-				if (toggle)
-                {
-					pSystem.Play();
-					print("Toggled ON");
-				}
-
-                else
-                {
-					pSystem.Stop();
-					print("Toggled OFF");
-				}
-					
-			}
-				
-		}
-
 
 		if (canDeposit)
 		{
 			if (Input.GetKeyDown(KeyCode.E))
 			{
 				Debug.Log("hive pressed");
-				canDeposit = false;
 
+				
+				canDeposit = false;
+				
 				Singleton.Instance.hiveTotal += Singleton.Instance.nectarCount;
 				//Debug.Log("Hive total: " + Singleton.Instance.hiveTotal);
 
@@ -147,14 +127,14 @@ public class BasicBehaviour : MonoBehaviour
 
 		nectarText.text = "Current Nectar: " + Singleton.Instance.nectarCount.ToString();
 
-		if (pollinated)
-		{
-			Singleton.Instance.pollenModifier = 5;
-		}
-		else
-		{
-			Singleton.Instance.pollenModifier = 3;
-		}
+		//if (pollinated)
+		//{
+		//	Singleton.Instance.pollenModifier = 5;
+		//}
+		//else
+		//{
+		//	Singleton.Instance.pollenModifier = 3;
+		//}
 	}
 
 	// Call the FixedUpdate functions of the active or overriding behaviours.
@@ -215,6 +195,13 @@ public class BasicBehaviour : MonoBehaviour
 			}
 		}
 
+		// initially, the temporary vector should equal the player's position
+     Vector3 clampedPosition = transform.position;
+     // Now we can manipulte it to clamp the y element
+     clampedPosition.y = Mathf.Clamp(clampedPosition.y, -4.1f, 50);
+     // re-assigning the transform's position will clamp it
+     transform.position = clampedPosition;
+
 	}
 
 
@@ -225,6 +212,7 @@ public class BasicBehaviour : MonoBehaviour
 		{
 			Debug.Log("Colliding with hive");
 			canDeposit = true;
+			hiveText.gameObject.SetActive(true);
 		}
 	}
 
@@ -233,6 +221,7 @@ public class BasicBehaviour : MonoBehaviour
 		if (collider.gameObject.tag == "Hive")
 		{
 			canDeposit = false;
+			hiveText.gameObject.SetActive(false);
 		}
 	}
 
